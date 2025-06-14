@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BrimOS ψ.sync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    html, body {
+      margin: 0;
+      background: #000;
+      color: #0ff;
+      font-family: monospace;
+      padding: 2rem;
+    }
+    .log {
+      background: #111;
+      padding: 1rem;
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #044;
+    }
+    .sigil {
+      margin-top: 2rem;
+      font-size: 0.75rem;
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+  <h1>BrimOS :: ψ.sync</h1>
+  <p>This node listens for cross-tab messages and heartbeat events.</p>
+
+  <div class="log" id="log"></div>
+
+  <div class="sigil">ψ.sync — BrimOS state signal watcher (localStorage & BroadcastChannel)</div>
+
+  <script>
+    const log = document.getElementById('log');
+
+    function appendLog(msg) {
+      const line = document.createElement('div');
+      line.textContent = msg;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    // LocalStorage sync
+    window.addEventListener('storage', (event) => {
+      if (event.key && event.newValue) {
+        appendLog(`[storage] ${event.key} = ${event.newValue}`);
+      }
+    });
+
+    // BroadcastChannel sync
+    const channel = new BroadcastChannel("brimos");
+    channel.onmessage = (event) => {
+      appendLog(`[broadcast] ${event.data}`);
+    };
+
+    // Ping every 5 seconds
+    setInterval(() => {
+      const time = new Date().toLocaleTimeString();
+      const msg = `heartbeat @ ${time}`;
+      localStorage.setItem("brimos_ping", time);
+      channel.postMessage(msg);
+      appendLog(`[self] ${msg}`);
+    }, 5000);
+  </script>
+</body>
+</html>
