@@ -1,0 +1,9 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Brim Swarm</title>
+    <style>body{margin:0;background:#000;color:#0ff;font-family:monospace;padding:2rem;}
+    ul{list-style:none;padding-left:0;}li{margin:0.5rem 0;}</style></head><body>
+    <h1>BrimOS Swarm Nodes</h1><ul id="swarm"></ul><script>
+    const nodes=["index.html","kernel.html","shell.html","radio.html","bridge.html","dream.html","scroll.html","sync.html"];
+    const ul=document.getElementById('swarm');
+    nodes.forEach(n=>{let li=document.createElement('li');let a=document.createElement('a');
+    a.href=n;a.textContent=n;a.style.color='#0ff';a.target='_blank';li.appendChild(a);ul.appendChild(li);});
+    </script></body></html>

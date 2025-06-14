@@ -1,0 +1,9 @@
+{
+  "origin": "https://democratizeinformation.github.io/brim/",
+  "modules": [
+    "index.html", "kernel.html", "shell.html", "avatar.html", "radio.html",
+    "scroll.html", "dream.html", "bridge.html", "sync.html", "status.html", "swarm.html"
+  ],
+  "version": "3.0",
+  "generated": "2025-06-14 00:37:06.483296"
+}

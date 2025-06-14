@@ -1,0 +1,15 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Brim Status</title>
+    <style>body{margin:0;background:#000;color:#0ff;font-family:monospace;padding:2rem;}
+    .green{color:#0f0;} .red{color:#f00;}</style></head><body><h1>BrimOS Live Status</h1>
+    <ul id="statusList"></ul><script>
+    const files=["index.html","kernel.html","shell.html","avatar.html","radio.html","scroll.html","bridge.html"];
+    const base="https://democratizeinformation.github.io/brim/";
+    const ul=document.getElementById("statusList");
+    files.forEach(file=>{
+      fetch(base+file).then(r=>{
+        const li=document.createElement("li");
+        li.innerHTML = r.ok ? `<span class='green'>✔</span> ${file}` : `<span class='red'>✖</span> ${file}`;
+        ul.appendChild(li);
+      });
+    });
+    </script></body></html>
